@@ -38,11 +38,11 @@ plotData(X, y);
 % Put some labels 
 hold on;
 % Labels and Legend
-xlabel('Exam 1 score')
-ylabel('Exam 2 score')
+xlabel('Exam 1 score');
+ylabel('Exam 2 score');
 
 % Specified in plot order
-legend('Admitted', 'Not admitted')
+legend('Admitted', 'Not admitted');
 hold off;
 
 fprintf('\nProgram paused. Press enter to continue.\n');
@@ -67,6 +67,7 @@ initial_theta = zeros(n + 1, 1);
 [cost, grad] = costFunction(initial_theta, X, y);
 
 fprintf('Cost at initial theta (zeros): %f\n', cost);
+fprintf('test\n');
 fprintf('Gradient at initial theta (zeros): \n');
 fprintf(' %f \n', grad);
 
