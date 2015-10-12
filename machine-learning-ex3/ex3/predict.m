@@ -21,15 +21,17 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+% Forward propagate X via Theta1 and Theta2 to get the output layer values (i,j) is the probability that X(i,:) is of label j
+% Forward propagate via Theta1 (don't forget to add a column of 1's)
+hidden_layer_values = sigmoid([ones(m, 1) , X] * Theta1')
+% Forward propagate via Theta2 (don't forget to add a column of 1's)
+output_layer_values = sigmoid([ones(m, 1) , hidden_layer_values] * Theta2')
 
+% For each row in the output layer values, the max column is the likeliest label
+[max_probabilities, likeliest_labels] = max(output_layer_values, [], 2)
 
-
-
-
-
-
+p = likeliest_labels
 
 % =========================================================================
-
 
 end

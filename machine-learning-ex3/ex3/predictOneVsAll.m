@@ -30,13 +30,14 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
+% set up a prediction matrix where (i,j) is the probability that X(i,:) is of label j
+prediction_matrix = X * all_theta'
 
+% pick the highest prediction j for each X(i,:)
+[max_probabilities, likeliest_labels] = max(prediction_matrix, [], 2)
 
-
-
-
+p = likeliest_labels
 
 % =========================================================================
-
 
 end
