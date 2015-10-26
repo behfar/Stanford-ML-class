@@ -15,10 +15,12 @@ X_poly = zeros(numel(X), p);
 %
 % 
 
-
-
-
-
+% The first column of X_poly is simply X, and each subsequent column is
+% the previous column elementwise-multiplied by X
+X_poly(:,1) = X;
+for i=2:p
+	X_poly(:,i) = X_poly(:,i-1) .* X;
+end
 
 % =========================================================================
 
