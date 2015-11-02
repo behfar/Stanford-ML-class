@@ -97,14 +97,9 @@ while ~isempty(email_contents)
     %       str2). It will return 1 only if the two strings are equivalent.
     %
 
-
-
-
-
-
-
-
-
+    % if str is in vocablist, append it to word_indices
+    % (if str is not in vocablist, find returns empty array, leaving word_indices unchanged)
+    word_indices = [word_indices ; find(strcmp(vocabList, str))];
 
     % =============================================================
 
