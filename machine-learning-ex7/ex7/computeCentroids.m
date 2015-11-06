@@ -24,14 +24,19 @@ centroids = zeros(K, n);
 %               centroid i.
 %
 % Note: You can use a for-loop over the centroids to compute this.
-%
 
+% Go through X and sum each row into its centroid. Also count how many rows were summed.
+counts = zeros(K);
+for i=1:m
+	centroid_index = idx(i);
+	centroids(centroid_index,:) = centroids(centroid_index,:) + X(i,:);
+	counts(centroid_index) = counts(centroid_index) + 1;
+end
 
-
-
-
-
-
+% Normalize each centroid by the numbers of rows that were summed into it.
+for centroid_index=1:K
+	centroids(centroid_index,:) = centroids(centroid_index,:) / counts(centroid_index);
+end
 
 % =============================================================
 

@@ -19,13 +19,22 @@ idx = zeros(size(X,1), 1);
 %               range 1..K
 %
 % Note: You can use a for-loop over the examples to compute this.
-%
 
+% Number of rows in X
+m = length(X);
 
+% Find distances of rows of X to each centroid
+% Each row of distances stores the (squared) distance of X(i) to the centroids
+distances = zeros(m, K);
+for i=1:m
+	for j=1:K
+		diff = X(i,:) - centroids(j,:);
+		distances (i,j) = diff * diff';
+	end
+end
 
-
-
-
+% Take the index of the min in each row (ie dim=2) of distances, and store it in idx 
+[Y, idx] = min(distances, [], 2);
 
 % =============================================================
 
