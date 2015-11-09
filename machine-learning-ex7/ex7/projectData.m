@@ -16,10 +16,12 @@ Z = zeros(size(X, 1), K);
 %               eigenvector is given as follows:
 %                    x = X(i, :)';
 %                    projection_k = x' * U(:, k);
-%
 
+% Separate out the first K vectors in U
+U_reduced = U(:,1:K);
 
-
+% Project X onto U_reduced to get Z
+Z = X * U_reduced;
 
 % =============================================================
 

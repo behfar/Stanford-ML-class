@@ -19,9 +19,12 @@ X_rec = zeros(size(Z, 1), size(U, 1));
 %                    recovered_j = v' * U(j, 1:K)';
 %
 %               Notice that U(j, 1:K) is a row vector.
-%               
 
+% Separate out the first K vectors in U
+U_reduced = U(:,1:K);
 
+% Project X onto U_reduced to get Z
+X_rec = Z * U_reduced';
 
 % =============================================================
 

@@ -18,13 +18,10 @@ S = zeros(n);
 %
 % Note: When computing the covariance matrix, remember to divide by m (the
 %       number of examples).
-%
 
-
-
-
-
-
+% Compute the covariance matrix, the run svd
+covariance = (1/m) * X' * X;
+[U, S, V] = svd(covariance);
 
 % =========================================================================
 
