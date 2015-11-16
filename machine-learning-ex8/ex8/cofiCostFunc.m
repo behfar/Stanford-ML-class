@@ -40,20 +40,44 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+% First compute all prediction errors (costs) assuming every movie i was
+% rated by every user j
+all_predictions = X * Theta';
+all_prediction_errors = all_predictions - Y;
 
+% Then zero out all (i,j) except where R>0, and square
+masked_all_prediction_errors = all_prediction_errors .* R;
+masked_all_prediction_errors_squared = masked_all_prediction_errors .^ 2;
+% Then get J but summing over the squares of the errors
+% (don't forget to divide by 2, per the formula)
+J = (1/2) * sum(sum(masked_all_prediction_errors_squared));
 
+% Add regularization terms to J
+J = J + (lambda/2) * sum(sum(X .^ 2)) + (lambda/2) * sum(sum(Theta .^ 2));
 
+% The gradient of J with respect to X
+for i=1:num_movies
+	% Mask out Theta rows j (and Y columns j) where user j has not rated movie i
+	mask_index = find(R(i,:)==1);
+	masked_Theta = Theta(mask_index,:);
+	masked_Y = Y(i,mask_index);
+	X_grad(i,:) = ((X(i,:) * masked_Theta') - masked_Y) * masked_Theta;
+end
 
+% Add regularization term to X_grad
+X_grad = X_grad + (lambda * X);
 
+% The gradient of J with respect to Theta
+for j=1:num_users
+	% Mask out X rows i (and Y rows i) where user j has not rated movie i
+	mask_index = find(R(:,j)==1);
+	masked_X = X(mask_index,:);
+	masked_Y = Y(mask_index,j);
+	Theta_grad(j,:) = ((masked_X * Theta(j,:)') - masked_Y)' * masked_X;
+end
 
-
-
-
-
-
-
-
-
+% Add regularization term to Theta_grad
+Theta_grad = Theta_grad + (lambda * Theta);
 
 % =============================================================
 

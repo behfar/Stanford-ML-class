@@ -21,14 +21,16 @@ sigma2 = zeros(n, 1);
 %               should contain variance of the i-th feature.
 %
 
+% To get the means, sum X's columns and divide by m (number of rows)
+% Also, transpose, since mu is expected to be a column vector
+mu = (sum(X) / m)';
 
-
-
-
-
-
-
-
+% Accumulate the variances using a for-loop, then divide by m
+for row=1:m
+	diff = X(row,:)' - mu;
+	sigma2 = sigma2 + (diff.^2);
+end
+sigma2 = sigma2 / m;
 
 % =============================================================
 
